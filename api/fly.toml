@@ -1,0 +1,38 @@
+app = "opengym-api-rc"
+primary_region = "iad"
+
+[build]
+  dockerfile = "Dockerfile"
+  [build.args]
+    VERSION = "fly"
+
+[env]
+  PORT = "3000"
+  DATA_DIR = "/data"
+  TRUST_PROXY = "1"
+  RP_ID = "opengym-reluctantchampion.netlify.app"
+  ORIGIN = "https://opengym-reluctantchampion.netlify.app"
+  RP_NAME = "openGym"
+  FIRST_USER_ADMIN = "1"
+
+[mounts]
+  source = "opengym_data"
+  destination = "/data"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    method = "GET"
+    path = "/api/health"
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "20s"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
