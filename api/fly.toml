@@ -14,6 +14,7 @@ primary_region = "iad"
   ORIGIN = "https://opengym-reluctantchampion.netlify.app"
   RP_NAME = "openGym"
   FIRST_USER_ADMIN = "1"
+  INVITE_ONLY = "1"
 
 [mounts]
   source = "opengym_data"
